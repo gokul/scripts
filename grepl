@@ -1,0 +1,10 @@
+#!/bin/sh
+# grepl - replaces a string Y matching Z in files matching X.
+
+echo "Replacing '$2' to '$3' in files matching '$1'..."
+
+ct=`find -iname "$1" | xargs grep -r "$2" * | wc -l`
+
+find -iname "$1" | xargs grep -rl "$2" | xargs sed -i "s|$2|$3|g"
+
+echo "Replaced $ct occurrences."
